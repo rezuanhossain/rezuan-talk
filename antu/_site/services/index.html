@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Affiliate marketing reviews and growth tips by Rezuan" />
+    <meta name="theme-color" content="#0f172a" />
+    <title>Services · Rezuan | Affiliate Marketing Strategist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/site.css" />
+  </head>
+  <body>
+    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="bg-noise" aria-hidden="true"></div>
+    <div class="bg-orb orb-one" aria-hidden="true"></div>
+    <div class="bg-orb orb-two" aria-hidden="true"></div>
+    <div class="cursor-spotlight" aria-hidden="true"></div>
+    <header class="site-header">
+      <div class="container">
+        <nav class="nav">
+          <a class="logo" href="/" aria-label="Rezuan Home">
+            <span>Rezuan Talk</span>
+          </a>
+          <div class="nav-links">
+            <a href="/blog/">Blog</a>
+            <a href="/blog/#resources">Resources</a>
+            <a href="/#hero-form">Subscribe</a>
+            <a class="nav-cta" href="/contact/">Book a call</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container page-content">
+      <section class="section">
+  <h1>Service playbooks</h1>
+  <p class="lead">Choose the engagement style that fits your launch roadmap. Every package includes dashboards, SOPs, and weekly video reports.</p>
+</section>
+<section class="cards">
+  <article class="card">
+    <h2>01 · Review Lab Retainer</h2>
+    <p>Research-backed reviews and comparison pages crafted to rank quickly and convince readers with authenticity.</p>
+    <ul class="list-check">
+      <li>Editorial calendar & persona docs</li>
+      <li>Hands-on product testing checklist</li>
+      <li>Schema, tables, multimedia briefs</li>
+      <li>QA + optimization roadmap</li>
+    </ul>
+  </article>
+  <article class="card">
+    <h2>02 · Launch Accelerator</h2>
+    <p>Lifecycle campaigns for new affiliate offers, bundling landing pages, email swipes, webinar decks, and UGC collaborations.</p>
+    <ul class="list-check">
+      <li>Offer audit & messaging pillars</li>
+      <li>Copy + design direction in Figma</li>
+      <li>Automation & tracking setup</li>
+      <li>Partner onboarding toolkit</li>
+    </ul>
+  </article>
+  <article class="card">
+    <h2>03 · Optimization Sprint</h2>
+    <p>A 4-week engagement to refresh content libraries, rebuild conversion elements, and tighten analytics.</p>
+    <ul class="list-check">
+      <li>Heatmap & SERP diagnostics</li>
+      <li>Speed + UX backlog</li>
+      <li>Affiliate link QA + monetization ideas</li>
+      <li>Refresh calendar & Loom walkthroughs</li>
+    </ul>
+  </article>
+</section>
+<section class="section">
+  <h2>Engagement Process</h2>
+  <div class="cards">
+    <article class="card">
+      <h3>Discovery</h3>
+      <p>We align on your revenue KPIs, affiliate mix, timelines, and available assets. Expect a Notion dashboard within 48 hours.</p>
+    </article>
+    <article class="card">
+      <h3>Build</h3>
+      <p>Sprints of 1–2 weeks produce content, CRO changes, and tracking updates. Every task includes owner, deadline, and QA status.</p>
+    </article>
+    <article class="card">
+      <h3>Scale</h3>
+      <p>We run refresh cadences, GTM experiments, and partner enablement. Optional co-creation with your in-house writers or designers.</p>
+    </article>
+  </div>
+</section>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div>
+          <p><strong>Rezuan · Affiliate Marketing Specialist</strong></p>
+          <small>Affiliate launches, conversion copy, and product reviews built for trustworthy growth.</small>
+        </div>
+        <div class="footer-links">
+          <a href="mailto:rf.rt332211@gmail.com">Email</a>
+          <a href="/blog/">Latest posts</a>
+          <a href="/services/">Service guide</a>
+        </div>
+      </div>
+    </footer>
+    <script>
+      const cursorSpotlight = document.querySelector(".cursor-spotlight");
+      window.addEventListener("pointermove", (e) => {
+        cursorSpotlight.style.setProperty("--x", e.clientX + "px");
+        cursorSpotlight.style.setProperty("--y", e.clientY + "px");
+      });
+
+      document.querySelectorAll(".magnetic").forEach((button) => {
+        button.addEventListener("mousemove", (e) => {
+          const rect = button.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          button.style.transform = `translate(${x * 0.12}px, ${y * 0.12}px)`;
+        });
+        button.addEventListener("mouseleave", () => {
+          button.style.transform = "";
+        });
+      });
+
+      const typedNodes = document.querySelectorAll(".typewriter");
+      typedNodes.forEach((node) => {
+        const words = JSON.parse(node.dataset.words || "[]");
+        let index = 0;
+        let char = 0;
+        let deleting = false;
+        const base = node.textContent.trim();
+        function type() {
+          if (!words.length) return;
+          const current = words[index];
+          node.dataset.typing = current.substring(0, char);
+          node.innerHTML = base + " <span class=\"typewriter-ghost\">" + node.dataset.typing + "</span>";
+          if (!deleting && char === current.length) {
+            deleting = true;
+            setTimeout(type, 1500);
+            return;
+          }
+          if (deleting && char === 0) {
+            deleting = false;
+            index = (index + 1) % words.length;
+          }
+          char += deleting ? -1 : 1;
+          setTimeout(type, deleting ? 40 : 80);
+        }
+        type();
+      });
+
+      const liveCount = document.querySelector(".hero-live-count");
+      if (liveCount) {
+        const baseCount = parseInt(liveCount.dataset.count || "90", 10);
+        function pulseCount() {
+          const delta = Math.round((Math.random() - 0.5) * 8);
+          liveCount.textContent = baseCount + delta;
+          setTimeout(pulseCount, 2200);
+        }
+        pulseCount();
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+---
+layout: layouts/base.njk
+title: Blog
+---
+<section class="blog-shell">
+  <div class="blog-hero">
+    <div>
+      <h1>Blog & Resources</h1>
+      <p>Fresh breakdowns of the experiments I run across review programs, monetization stacks, lifecycle flows, and creator launches.</p>
+    </div>
+  </div>
+  <div class="blog-toolbar">
+    <label class="blog-search" aria-label="Search posts">
+      <input type="search" placeholder="Search articles, guides..." />
+      <span class="icon">⌕</span>
+    </label>
+    <div class="blog-pills" role="tablist">
+      <button class="pill active" data-filter="all">All</button>
+      {% for category in collections.posts | uniqueCategories %}
+      <button class="pill" data-filter="{{ category | lower | replace(' ', '-') }}">{{ category }}</button>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="blog-grid">
+    {% for post in collections.posts | reverse %}
+    <article class="blog-card"
+      data-category="{{ post.data.category | lower | replace(' ', '-') }}"
+      data-title="{{ post.data.title | lower }}"
+      data-excerpt="{{ post.data.excerpt | lower }}">
+      <a class="blog-thumb" href="{{ post.url }}">
+        {% if post.data.cover %}
+        <img src="{{ post.data.cover }}" alt="{{ post.data.title }} cover image" loading="lazy" />
+        {% else %}
+        <div class="blog-thumb-fallback"></div>
+        {% endif %}
+      </a>
+      <div class="blog-content">
+        <div class="blog-meta">
+          <span class="badge">{{ post.data.category }}</span>
+          <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
+        </div>
+        <a href="{{ post.url }}"><h3>{{ post.data.title }}</h3></a>
+        <p>{{ post.data.excerpt }}</p>
+        <a class="btn ghost" href="{{ post.url }}">Read article →</a>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+<script>
+  const searchField = document.querySelector(".blog-search input");
+  const pills = document.querySelectorAll(".blog-pills .pill");
+  const cards = document.querySelectorAll(".blog-card");
+  let activeFilter = "all";
+  function filterCards() {
+    const query = searchField.value.trim().toLowerCase();
+    cards.forEach((card) => {
+      const matchesCategory = activeFilter === "all" || card.dataset.category === activeFilter;
+      const matchesQuery =
+        !query ||
+        card.dataset.title.includes(query) ||
+        card.dataset.excerpt.includes(query);
+      card.style.display = matchesCategory && matchesQuery ? "" : "none";
+    });
+  }
+  pills.forEach((pill) => {
+    pill.addEventListener("click", () => {
+      pills.forEach((btn) => btn.classList.remove("active"));
+      pill.classList.add("active");
+      activeFilter = pill.dataset.filter;
+      filterCards();
+    });
+  });
+  searchField.addEventListener("input", filterCards);
+</script>

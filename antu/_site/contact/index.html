@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Affiliate marketing reviews and growth tips by Rezuan" />
+    <meta name="theme-color" content="#0f172a" />
+    <title>Contact · Rezuan | Affiliate Marketing Strategist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/site.css" />
+  </head>
+  <body>
+    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="bg-noise" aria-hidden="true"></div>
+    <div class="bg-orb orb-one" aria-hidden="true"></div>
+    <div class="bg-orb orb-two" aria-hidden="true"></div>
+    <div class="cursor-spotlight" aria-hidden="true"></div>
+    <header class="site-header">
+      <div class="container">
+        <nav class="nav">
+          <a class="logo" href="/" aria-label="Rezuan Home">
+            <span>Rezuan Talk</span>
+          </a>
+          <div class="nav-links">
+            <a href="/blog/">Blog</a>
+            <a href="/blog/#resources">Resources</a>
+            <a href="/#hero-form">Subscribe</a>
+            <a class="nav-cta" href="/contact/">Book a call</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container page-content">
+      <section class="section">
+  <h1>Book a collaboration</h1>
+  <p class="lead">Tell me about your offer, affiliate goals, and launch timeline. I respond within two business days with next steps or a short Loom.</p>
+  <div class="card">
+    <form name="contact" method="post" data-netlify="true" class="contact-form">
+      <label>Full name
+        <input type="text" name="name" required />
+      </label>
+      <label>Email
+        <input type="email" name="email" required />
+      </label>
+      <label>Company / Product
+        <input type="text" name="company" />
+      </label>
+      <label>Project details
+        <textarea name="message" rows="6" placeholder="Share launch goal, target audience, KPIs, timeline" required></textarea>
+      </label>
+      <button type="submit">Send the brief →</button>
+    </form>
+  </div>
+</section>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div>
+          <p><strong>Rezuan · Affiliate Marketing Specialist</strong></p>
+          <small>Affiliate launches, conversion copy, and product reviews built for trustworthy growth.</small>
+        </div>
+        <div class="footer-links">
+          <a href="mailto:rf.rt332211@gmail.com">Email</a>
+          <a href="/blog/">Latest posts</a>
+          <a href="/services/">Service guide</a>
+        </div>
+      </div>
+    </footer>
+    <script>
+      const cursorSpotlight = document.querySelector(".cursor-spotlight");
+      window.addEventListener("pointermove", (e) => {
+        cursorSpotlight.style.setProperty("--x", e.clientX + "px");
+        cursorSpotlight.style.setProperty("--y", e.clientY + "px");
+      });
+
+      document.querySelectorAll(".magnetic").forEach((button) => {
+        button.addEventListener("mousemove", (e) => {
+          const rect = button.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          button.style.transform = `translate(${x * 0.12}px, ${y * 0.12}px)`;
+        });
+        button.addEventListener("mouseleave", () => {
+          button.style.transform = "";
+        });
+      });
+
+      const typedNodes = document.querySelectorAll(".typewriter");
+      typedNodes.forEach((node) => {
+        const words = JSON.parse(node.dataset.words || "[]");
+        let index = 0;
+        let char = 0;
+        let deleting = false;
+        const base = node.textContent.trim();
+        function type() {
+          if (!words.length) return;
+          const current = words[index];
+          node.dataset.typing = current.substring(0, char);
+          node.innerHTML = base + " <span class=\"typewriter-ghost\">" + node.dataset.typing + "</span>";
+          if (!deleting && char === current.length) {
+            deleting = true;
+            setTimeout(type, 1500);
+            return;
+          }
+          if (deleting && char === 0) {
+            deleting = false;
+            index = (index + 1) % words.length;
+          }
+          char += deleting ? -1 : 1;
+          setTimeout(type, deleting ? 40 : 80);
+        }
+        type();
+      });
+
+      const liveCount = document.querySelector(".hero-live-count");
+      if (liveCount) {
+        const baseCount = parseInt(liveCount.dataset.count || "90", 10);
+        function pulseCount() {
+          const delta = Math.round((Math.random() - 0.5) * 8);
+          liveCount.textContent = baseCount + delta;
+          setTimeout(pulseCount, 2200);
+        }
+        pulseCount();
+      }
+    </script>
+  </body>
+</html>
